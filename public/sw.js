@@ -1,6 +1,3 @@
-self.options = {
-    "domain": "5gvci.com",
-    "zoneId": 12002751
-}
-self.lary = ""
-importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw')
+// Advertising service worker removed. Keep this file harmless for any existing registration.
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
