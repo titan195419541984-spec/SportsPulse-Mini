@@ -31,6 +31,14 @@ function send(res,status,body,type="application/json; charset=utf-8") {
   res.end(type.startsWith("application/json") ? JSON.stringify(body) : body);
 }
 const server = http.createServer(async (req,res) => {
+  const origin = req.headers.origin || "";
+  if (origin === "https://sportsarena-pulse-global.onrender.com") {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  }
+  if (req.method === "OPTIONS") { res.writeHead(204); return res.end(); }
   const url = new URL(req.url,"http://localhost");
   if (url.pathname === "/healthz") return send(res,200,{ok:true,app:"SportsArena Pulse",base44:false});
   if (url.pathname === "/api/sports") return send(res,200,{sports:Object.entries(sports).map(([id,s])=>({id,...s}))});
