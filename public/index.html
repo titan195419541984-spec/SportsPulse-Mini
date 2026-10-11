@@ -29,7 +29,7 @@
 <nav class="nav" id="sports-nav" aria-label="Sports">
 <button class="active" data-sport="all">ALL SPORTS</button><button data-sport="nfl">NFL</button><button data-sport="nba">NBA</button><button data-sport="mlb">MLB</button><button data-sport="nhl">NHL</button><button data-sport="soccer">SOCCER</button><button data-sport="pga">PGA TOUR</button><button data-sport="wnba">WNBA</button><button data-sport="tennis">TENNIS</button><button id="highlights-btn" type="button">HIGHLIGHTS</button>
 </nav>
-<section class="top-ad-area" aria-label="Advertisement"><div class="top-ad-label">ADVERTISEMENT</div><div class="top-ad-inner"><script src="https://quge5.com/88/tag.min.js" data-zone="294208" async data-cfasync="false"></script></div></section>
+<section class="top-ad-area" aria-label="Advertisement"><div class="top-ad-label">ADVERTISEMENT</div><div class="top-ad-inner" id="top-ad-slot"><script src="https://quge5.com/88/tag.min.js" data-zone="294208" async data-cfasync="false"></script></div></section>
 <div class="ticker" aria-label="Latest sports updates"><span><i class="dot"></i><b>PGA TOUR</b> Live scores and updates</span><span><i class="dot"></i><b>THE ARENA</b> All the action, one place</span><span><i class="dot"></i>Scores refresh automatically</span></div>
 <main id="app"><div class="wrap"><div class="loading">LOADING LIVE SCORES…</div></div></main>
 
@@ -78,5 +78,36 @@ document.getElementById("back-to-scores")?.addEventListener("click",e=>{e.preven
 function showError(e){app.innerHTML='<div class="wrap"><div class="error">'+esc(e.message||"Unable to load live scores.")+'</div></div>'}
 function route(){if(new URLSearchParams(location.search).get("view")==="highlights"){renderHighlights();return}const p=location.pathname.match(/^\/game\/([a-z0-9.-]+)\/([0-9]+)\/?$/i);if(p){renderGame(p[1].toLowerCase(),p[2]);return}const q=new URLSearchParams(location.search);selectedSport=q.get("sport")||"all";renderScores().catch(showError)}
 window.addEventListener("popstate",route);route();setInterval(()=>{boardCache={};if(!location.pathname.startsWith("/game/"))renderScores().catch(()=>{});else{const p=location.pathname.match(/^\/game\/([a-z0-9.-]+)\/([0-9]+)\/?$/i);if(p)renderGame(p[1],p[2])}},30000);
+</script>
+<script>
+/* Keep ad-network banners in the reserved top ad slot when the provider inserts them as page-level overlays. */
+(function(){
+ const slot=document.getElementById("top-ad-slot");
+ if(!slot)return;
+ const isAdNode=(el)=>{
+  if(!(el instanceof HTMLElement))return false;
+  const src=((el.getAttribute&&el.getAttribute("src"))||"")+" "+((el.querySelector&&Array.from(el.querySelectorAll("iframe,script")).map(n=>n.getAttribute("src")||"").join(" "))||"");
+  const marker=(src+" "+(el.id||"")+" "+(el.className||"")).toLowerCase();
+  if(!/(quge5|294208|adsterra|popunder|banner|advert|adsby|ad-container|adslot)/.test(marker))return false;
+  const p=getComputedStyle(el).position;
+  return p==="fixed"||p==="sticky";
+ };
+ const moveAds=()=>{
+  document.querySelectorAll("iframe,div,aside,section").forEach(el=>{
+   if(el===slot||slot.contains(el)||!isAdNode(el))return;
+   if(el.closest("header,nav"))return;
+   el.style.setProperty("position","relative","important");
+   el.style.setProperty("inset","auto","important");
+   el.style.setProperty("top","auto","important");
+   el.style.setProperty("right","auto","important");
+   el.style.setProperty("bottom","auto","important");
+   el.style.setProperty("left","auto","important");
+   el.style.setProperty("z-index","1","important");
+   slot.appendChild(el);
+  });
+ };
+ new MutationObserver(moveAds).observe(document.documentElement,{childList:true,subtree:true});
+ moveAds();
+})();
 </script>
 </body></html>
