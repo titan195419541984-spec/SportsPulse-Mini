@@ -20,6 +20,8 @@
 .highlight-note{border:1px solid var(--line);border-radius:16px;padding:18px;color:var(--muted);line-height:1.6;margin:0 0 36px}
 @media(max-width:620px){.highlight-grid{grid-template-columns:1fr}.highlight-card{min-height:170px}}
 @media(max-width:620px){.wrap{padding:0 28px}.top{height:98px;padding:0 28px}.brand{font-size:25px}.brand-mark{width:49px;height:49px}.top .pill{padding:15px 20px}.nav{padding:0 18px}.nav button{padding:21px 17px;font-size:14px}.ticker{height:58px}.section-head{margin:62px 0 28px;align-items:end}.section-head h1,.section-head h2{font-size:34px}.updated{font-size:12px;letter-spacing:2px;max-width:145px}.game-card{padding:28px 28px 30px;border-radius:21px}.card-top{margin-bottom:24px}.live{font-size:13px;padding:10px 14px}.team-row{grid-template-columns:56px minmax(0,1fr) auto;gap:13px;margin:20px 0}.team-name{font-size:22px}.score{font-size:43px}.card-footer{display:grid;gap:14px;font-size:15px}.date-line{margin-top:26px}.hero{padding:70px 0}.hero h1{font-size:clamp(36px,8vw,56px);letter-spacing:-2.1px}.hero-meta{font-size:16px;letter-spacing:3px}.hero-team{grid-template-columns:78px minmax(0,1fr) auto;gap:16px;padding:22px 18px}.hero-team .logo{width:58px;height:58px}.hero-team .team-name{font-size:21px}.hero-team .score{font-size:41px}.hero-actions{gap:18px;margin-top:40px}.pill.big{width:100%;justify-content:center;padding:22px 14px}.outline{width:100%;padding:22px 14px}.socials button{height:63px;width:69px}.detail-grid{grid-template-columns:1fr}.footer{font-size:10px}.section-head h1{letter-spacing:-1.6px}}
+
+.top-ad-area{width:100%;min-height:150px;padding:12px 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;background:#080a0b;border-bottom:1px solid var(--line,#25292c);position:relative;z-index:2;overflow:visible}.top-ad-label{font:600 10px var(--mono,ui-monospace,monospace);letter-spacing:3px;color:#7d8792;text-align:center}.top-ad-inner{width:100%;max-width:970px;min-height:110px;display:flex;align-items:center;justify-content:center;position:relative}.top-ad-inner iframe{max-width:100%}@media(max-width:600px){.top-ad-area{min-height:130px;padding:8px 8px 12px}.top-ad-inner{min-height:100px}}
 </style>
 </head>
 <body>
@@ -27,13 +29,14 @@
 <nav class="nav" id="sports-nav" aria-label="Sports">
 <button class="active" data-sport="all">ALL SPORTS</button><button data-sport="nfl">NFL</button><button data-sport="nba">NBA</button><button data-sport="mlb">MLB</button><button data-sport="nhl">NHL</button><button data-sport="soccer">SOCCER</button><button data-sport="pga">PGA TOUR</button><button data-sport="wnba">WNBA</button><button data-sport="tennis">TENNIS</button><button id="highlights-btn" type="button">HIGHLIGHTS</button>
 </nav>
+<section class="top-ad-area" aria-label="Advertisement"><div class="top-ad-label">ADVERTISEMENT</div><div class="top-ad-inner"><script src="https://quge5.com/88/tag.min.js" data-zone="294208" async data-cfasync="false"></script></div></section>
 <div class="ticker" aria-label="Latest sports updates"><span><i class="dot"></i><b>PGA TOUR</b> Live scores and updates</span><span><i class="dot"></i><b>THE ARENA</b> All the action, one place</span><span><i class="dot"></i>Scores refresh automatically</span></div>
 <main id="app"><div class="wrap"><div class="loading">LOADING LIVE SCORES…</div></div></main>
 
 <!-- AD SCRIPT: added below main content to avoid covering the header/navigation -->
 <div class="ad-slot" style="margin:24px auto;max-width:1080px;padding:0 28px;text-align:center;">
   <div style="font:600 11px var(--mono);letter-spacing:3px;color:#3a4246;margin-bottom:8px;text-transform:uppercase;">Advertisement</div>
-  <script src="https://quge5.com/88/tag.min.js" data-zone="294208" async data-cfasync="false"></script>
+  
 </div>
 
 <footer class="footer">THE ARENA · LIVE SPORTS · INDEPENDENT PLATFORM</footer>
